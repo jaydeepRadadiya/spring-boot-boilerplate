@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: Spring boot boilerplate
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/db_example
+    username: root
+    password: Mysql@123
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    showSql: true
+    hibernate:
+      ddl-auto: update
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: [ "health","prometheus", "metrics", "info" ]
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true         # needs security review, secure end point
+    prometheus:
+      enabled: true
+
+logging:
+  level:
+    org.springframework: INFO
+    com.example.demo: INFO
+
+jwt:
+  secretKey: secret
+  expirationMinute: 10
+
+swagger:
+  contact-name: Jaydeep Radadiya
+  contact-mail: jaydeep.radadiya.9041@gmail.com
+  app-name: Spring Boot Boilerplate Project
+  app-description: "Spring Boot Boilerplate is a starter kit."
+  app-version: 1.0.0
+  app-license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+  app-license: Apache 2.0
+
+springdoc:
+  show-actuator: true
+  paths-to-match: /**
+  packages-to-scan: com.example.demo
