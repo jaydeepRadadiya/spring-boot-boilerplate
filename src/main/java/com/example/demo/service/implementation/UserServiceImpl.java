@@ -3,6 +3,7 @@ package com.example.demo.service.implementation;
 
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.mappers.UserMapper;
+import com.example.demo.exception.ErrorCode;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
     public User getUser( Long id) throws UserNotFoundException {
         log.info("UserService.one");
         return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Id not found : " + id));
+                .orElseThrow(() -> new UserNotFoundException(ErrorCode.ENTITY_NOT_FOUND, "Id not found : " + id));
     }
 
     public  UserDto replaceUser( UserDto updatedUser, Long id) {
